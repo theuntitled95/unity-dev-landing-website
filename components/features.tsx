@@ -4,8 +4,10 @@ import {
   Cpu,
   Globe,
   Laptop,
+  Layers,
   Server,
   Shield,
+  Terminal,
   Zap,
 } from "lucide-react";
 
@@ -85,6 +87,22 @@ export function Features({language}: FeaturesProps) {
 
   return (
     <section id="features" className="py-20 relative bg-[#050505]">
+      {/* Background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[#0f1117] opacity-90"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      </div>
+
+      {/* Floating tech elements */}
+      <div className="absolute top-20 right-10 opacity-10 hidden lg:block">
+        <Terminal className="h-24 w-24 text-purple-500" />
+      </div>
+      <div className="absolute bottom-20 left-10 opacity-10 hidden lg:block">
+        <Cpu className="h-24 w-24 text-cyan-500" />
+      </div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-5 hidden lg:block">
+        <Layers className="h-96 w-96 text-indigo-500 opacity-80" />
+      </div>
       <div className="absolute inset-0 bg-grid-white/[0.02] -z-10" />
 
       <div className="container relative z-10">

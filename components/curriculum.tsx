@@ -173,7 +173,7 @@ export function Curriculum({language}: CurriculumProps) {
                         : "إنشاء وتكوين مشاريع Unity جديدة لأنواع مختلفة من الألعاب"}
                     </p>
                   </div>
-                  <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333]">
+                  <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
                     <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
                       <div className="flex gap-1.5 mr-3">
                         <div className="size-3 rounded-full bg-red-500"></div>
@@ -203,8 +203,12 @@ public class PlayerController : MonoBehaviour
                 </div>
               </TabsContent>
 
-              <TabsContent value="module2" className="p-6 font-mono">
-                <div className="flex items-center gap-3 mb-4">
+              <TabsContent value="module2" className="p-6 ">
+                <div
+                  className={`flex items-center gap-3 mb-4 ${
+                    language === "ar" ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <Layers className="h-6 w-6 text-emerald-500" />
                   <h3 className="text-xl font-bold">
                     {language === "en"
@@ -213,9 +217,21 @@ public class PlayerController : MonoBehaviour
                   </h3>
                 </div>
 
-                <div className="space-y-4 pl-9">
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
+                <div
+                  className={`space-y-4 ${language === "ar" ? "pr-6" : "pl-6"}`}
+                >
+                  <div
+                    className={`relative ${
+                      language === "ar" ? "pr-9" : "pl-9"
+                    } border-[#333]`}
+                  >
+                    <div
+                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                        language === "ar" ? "right-0" : "left-0"
+                      }`}
+                    >
+                      <div className="size-2 rounded-full bg-emerald-500"></div>
+                    </div>
                     <p className="text-gray-300">
                       {language === "en"
                         ? "Rigidbody Physics"
@@ -227,9 +243,18 @@ public class PlayerController : MonoBehaviour
                         : "تنفيذ تفاعلات فيزيائية واقعية في ألعابك"}
                     </p>
                   </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <div
+                    className={`relative ${
+                      language === "ar" ? "pr-9" : "pl-9"
+                    } border-[#333]`}
+                  >
+                    <div
+                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                        language === "ar" ? "right-0" : "left-0"
+                      }`}
+                    >
+                      <div className="size-2 rounded-full bg-emerald-500"></div>
+                    </div>
                     <p className="text-gray-300">
                       {language === "en"
                         ? "Collision Detection"
@@ -241,9 +266,18 @@ public class PlayerController : MonoBehaviour
                         : "إدارة تفاعلات الكائنات من خلال المصادمات والمشغلات"}
                     </p>
                   </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <div
+                    className={`relative ${
+                      language === "ar" ? "pr-9" : "pl-9"
+                    } border-[#333]`}
+                  >
+                    <div
+                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                        language === "ar" ? "right-0" : "left-0"
+                      }`}
+                    >
+                      <div className="size-2 rounded-full bg-emerald-500"></div>
+                    </div>
                     <p className="text-gray-300">
                       {language === "en"
                         ? "Character Controllers"
@@ -255,9 +289,18 @@ public class PlayerController : MonoBehaviour
                         : "بناء أنظمة حركة وتحكم استجابية للاعب"}
                     </p>
                   </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <div
+                    className={`relative ${
+                      language === "ar" ? "pr-9" : "pl-9"
+                    } border-[#333]`}
+                  >
+                    <div
+                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                        language === "ar" ? "right-0" : "left-0"
+                      }`}
+                    >
+                      <div className="size-2 rounded-full bg-emerald-500"></div>
+                    </div>
                     <p className="text-gray-300">
                       {language === "en" ? "Input Systems" : "أنظمة الإدخال"}
                     </p>
@@ -267,10 +310,52 @@ public class PlayerController : MonoBehaviour
                         : "تنفيذ إدخال لوحة المفاتيح والماوس واللمس ووحدة التحكم"}
                     </p>
                   </div>
+                  <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
+                    <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
+                      <div className="flex gap-1.5 mr-3">
+                        <div className="size-3 rounded-full bg-red-500"></div>
+                        <div className="size-3 rounded-full bg-yellow-500"></div>
+                        <div className="size-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <div className="text-xs text-slate-400">C# Example</div>
+                    </div>
+                    <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
+                      <code>{`using UnityEngine;
+
+public class PhysicsController : MonoBehaviour
+{
+    public float jumpForce = 10f;
+    private Rigidbody rb;
+    private bool isGrounded;
+    
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
+        }
+    }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+}`}</code>
+                    </pre>
+                  </div>
                 </div>
               </TabsContent>
 
-              <TabsContent value="module3" className="p-6 font-mono">
+              <TabsContent value="module3" className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Code className="h-6 w-6 text-emerald-500" />
                   <h3 className="text-xl font-bold">
