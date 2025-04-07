@@ -29,28 +29,32 @@ export function Curriculum({language}: CurriculumProps) {
 
         <div className="max-w-4xl mx-auto">
           <Tabs defaultValue="module1" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-[#111] border border-[#222] p-1 rounded-lg">
+            <TabsList
+              className={`flex w-full bg-[#111] border border-[#222] p-1 rounded-lg ${
+                language === "ar" ? "flex-row-reverse" : "flex-row"
+              }`}
+            >
               <TabsTrigger
                 value="module1"
-                className="data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
+                className="flex-1 text-center data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
               >
                 {language === "en" ? "Module 1" : "الوحدة 1"}
               </TabsTrigger>
               <TabsTrigger
                 value="module2"
-                className="data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
+                className="flex-1 text-center data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
               >
                 {language === "en" ? "Module 2" : "الوحدة 2"}
               </TabsTrigger>
               <TabsTrigger
                 value="module3"
-                className="data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
+                className="flex-1 text-center data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
               >
                 {language === "en" ? "Module 3" : "الوحدة 3"}
               </TabsTrigger>
               <TabsTrigger
                 value="module4"
-                className="data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
+                className="flex-1 text-center data-[state=active]:bg-emerald-500 data-[state=active]:text-black"
               >
                 {language === "en" ? "Module 4" : "الوحدة 4"}
               </TabsTrigger>
@@ -81,109 +85,81 @@ export function Curriculum({language}: CurriculumProps) {
                 <div
                   className={`space-y-4 ${language === "ar" ? "pr-6" : "pl-6"}`}
                 >
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
+                  {[
+                    {
+                      en: [
+                        "Unity Interface and Navigation",
+                        "Learn the Unity Editor layout, windows, and navigation tools",
+                      ],
+                      ar: [
+                        "واجهة Unity والتنقل",
+                        "تعلم تخطيط محرر Unity والنوافذ وأدوات التنقل",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Game Objects and Components",
+                        "Understanding the building blocks of Unity scenes",
+                      ],
+                      ar: [
+                        "كائنات اللعبة والمكونات",
+                        "فهم اللبنات الأساسية لمشاهد Unity",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Basic Scripting in C#",
+                        "Variables, functions, and object-oriented programming fundamentals",
+                      ],
+                      ar: [
+                        "البرمجة الأساسية في C#",
+                        "المتغيرات والوظائف وأساسيات البرمجة الموجهة للكائنات",
+                      ],
+                    },
+                    {
+                      en: [
+                        "2D and 3D Project Setup",
+                        "Creating and configuring new Unity projects for different game types",
+                      ],
+                      ar: [
+                        "إعداد مشروع ثنائي وثلاثي الأبعاد",
+                        "إنشاء وتكوين مشاريع Unity جديدة لأنواع مختلفة من الألعاب",
+                      ],
+                    },
+                  ].map((item, index) => (
                     <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
+                      key={index}
+                      className={`relative ${
+                        language === "ar" ? "pr-9" : "pl-9"
+                      } border-[#333]`}
                     >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Unity Interface and Navigation"
-                        : "واجهة Unity والتنقل"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Learn the Unity Editor layout, windows, and navigation tools"
-                        : "تعلم تخطيط محرر Unity والنوافذ وأدوات التنقل"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Game Objects and Components"
-                        : "كائنات اللعبة والمكونات"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Understanding the building blocks of Unity scenes"
-                        : "فهم اللبنات الأساسية لمشاهد Unity"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Basic Scripting in C#"
-                        : "البرمجة الأساسية في C#"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Variables, functions, and object-oriented programming fundamentals"
-                        : "المتغيرات والوظائف وأساسيات البرمجة الموجهة للكائنات"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "2D and 3D Project Setup"
-                        : "إعداد مشروع ثنائي وثلاثي الأبعاد"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Creating and configuring new Unity projects for different game types"
-                        : "إنشاء وتكوين مشاريع Unity جديدة لأنواع مختلفة من الألعاب"}
-                    </p>
-                  </div>
-                  <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
-                      <div className="flex gap-1.5 mr-3">
-                        <div className="size-3 rounded-full bg-red-500"></div>
-                        <div className="size-3 rounded-full bg-yellow-500"></div>
-                        <div className="size-3 rounded-full bg-green-500"></div>
+                      <div
+                        className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      >
+                        <div className="size-2 rounded-full bg-emerald-500"></div>
                       </div>
-                      <div className="text-xs text-slate-400">C# Example</div>
+                      <p className="text-gray-300">
+                        {language === "en" ? item.en[0] : item.ar[0]}
+                      </p>
+                      <p className="text-gray-500 text-sm">
+                        {language === "en" ? item.en[1] : item.ar[1]}
+                      </p>
                     </div>
-                    <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
-                      <code>{`using UnityEngine;
+                  ))}
+                </div>
+                <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5 mr-3">
+                      <div className="size-3 rounded-full bg-red-500"></div>
+                      <div className="size-3 rounded-full bg-yellow-500"></div>
+                      <div className="size-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="text-xs text-slate-400">C# Example</div>
+                  </div>
+                  <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
+                    <code>{`using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -198,12 +174,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(movement * speed * Time.deltaTime);
     }
 }`}</code>
-                    </pre>
-                  </div>
+                  </pre>
                 </div>
               </TabsContent>
 
-              <TabsContent value="module2" className="p-6 ">
+              <TabsContent value="module2" className="p-6">
                 <div
                   className={`flex items-center gap-3 mb-4 ${
                     language === "ar" ? "flex-row-reverse" : ""
@@ -220,107 +195,81 @@ public class PlayerController : MonoBehaviour
                 <div
                   className={`space-y-4 ${language === "ar" ? "pr-6" : "pl-6"}`}
                 >
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
+                  {[
+                    {
+                      en: [
+                        "Rigidbody Physics",
+                        "Implementing realistic physics interactions in your games",
+                      ],
+                      ar: [
+                        "فيزياء الجسم الصلب",
+                        "تنفيذ تفاعلات فيزيائية واقعية في ألعابك",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Collision Detection",
+                        "Managing object interactions through colliders and triggers",
+                      ],
+                      ar: [
+                        "اكتشاف التصادم",
+                        "إدارة تفاعلات الكائنات من خلال المصادمات والمشغلات",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Character Controllers",
+                        "Building responsive player movement and control systems",
+                      ],
+                      ar: [
+                        "وحدات تحكم الشخصية",
+                        "بناء أنظمة حركة وتحكم استجابية للاعب",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Input Systems",
+                        "Implementing keyboard, mouse, touch, and controller input",
+                      ],
+                      ar: [
+                        "أنظمة الإدخال",
+                        "تنفيذ إدخال لوحة المفاتيح والماوس واللمس ووحدة التحكم",
+                      ],
+                    },
+                  ].map((item, index) => (
                     <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
+                      key={index}
+                      className={`relative ${
+                        language === "ar" ? "pr-9" : "pl-9"
+                      } border-[#333]`}
                     >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Rigidbody Physics"
-                        : "فيزياء الجسم الصلب"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Implementing realistic physics interactions in your games"
-                        : "تنفيذ تفاعلات فيزيائية واقعية في ألعابك"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Collision Detection"
-                        : "اكتشاف التصادم"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Managing object interactions through colliders and triggers"
-                        : "إدارة تفاعلات الكائنات من خلال المصادمات والمشغلات"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Character Controllers"
-                        : "وحدات تحكم الشخصية"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Building responsive player movement and control systems"
-                        : "بناء أنظمة حركة وتحكم استجابية للاعب"}
-                    </p>
-                  </div>
-                  <div
-                    className={`relative ${
-                      language === "ar" ? "pr-9" : "pl-9"
-                    } border-[#333]`}
-                  >
-                    <div
-                      className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
-                        language === "ar" ? "right-0" : "left-0"
-                      }`}
-                    >
-                      <div className="size-2 rounded-full bg-emerald-500"></div>
-                    </div>
-                    <p className="text-gray-300">
-                      {language === "en" ? "Input Systems" : "أنظمة الإدخال"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Implementing keyboard, mouse, touch, and controller input"
-                        : "تنفيذ إدخال لوحة المفاتيح والماوس واللمس ووحدة التحكم"}
-                    </p>
-                  </div>
-                  <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
-                    <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
-                      <div className="flex gap-1.5 mr-3">
-                        <div className="size-3 rounded-full bg-red-500"></div>
-                        <div className="size-3 rounded-full bg-yellow-500"></div>
-                        <div className="size-3 rounded-full bg-green-500"></div>
+                      <div
+                        className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      >
+                        <div className="size-2 rounded-full bg-emerald-500"></div>
                       </div>
-                      <div className="text-xs text-slate-400">C# Example</div>
+                      <p className="text-gray-300">
+                        {language === "en" ? item.en[0] : item.ar[0]}
+                      </p>
+                      <p className="text-gray-500 text-sm">
+                        {language === "en" ? item.en[1] : item.ar[1]}
+                      </p>
                     </div>
-                    <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
-                      <code>{`using UnityEngine;
+                  ))}
+                </div>
+                <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5 mr-3">
+                      <div className="size-3 rounded-full bg-red-500"></div>
+                      <div className="size-3 rounded-full bg-yellow-500"></div>
+                      <div className="size-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="text-xs text-slate-400">C# Example</div>
+                  </div>
+                  <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
+                    <code>{`using UnityEngine;
 
 public class PhysicsController : MonoBehaviour
 {
@@ -350,13 +299,16 @@ public class PhysicsController : MonoBehaviour
         }
     }
 }`}</code>
-                    </pre>
-                  </div>
+                  </pre>
                 </div>
               </TabsContent>
 
               <TabsContent value="module3" className="p-6">
-                <div className="flex items-center gap-3 mb-4">
+                <div
+                  className={`flex items-center gap-3 mb-4 ${
+                    language === "ar" ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <Code className="h-6 w-6 text-emerald-500" />
                   <h3 className="text-xl font-bold">
                     {language === "en"
@@ -365,67 +317,120 @@ public class PhysicsController : MonoBehaviour
                   </h3>
                 </div>
 
-                <div className="space-y-4 pl-9">
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Materials and Shaders"
-                        : "المواد والظلال"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Creating and customizing visual appearance with shaders"
-                        : "إنشاء وتخصيص المظهر المرئي باستخدام الظلال"}
-                    </p>
+                <div
+                  className={`space-y-4 ${language === "ar" ? "pr-6" : "pl-6"}`}
+                >
+                  {[
+                    {
+                      en: [
+                        "Materials and Shaders",
+                        "Creating and customizing visual appearance with shaders",
+                      ],
+                      ar: [
+                        "المواد والظلال",
+                        "إنشاء وتخصيص المظهر المرئي باستخدام الظلال",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Animation Systems",
+                        "Working with the Animator Controller and animation state machines",
+                      ],
+                      ar: [
+                        "أنظمة الرسوم المتحركة",
+                        "العمل مع وحدة تحكم الرسوم المتحركة وآلات حالة الرسوم المتحركة",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Particle Effects",
+                        "Creating dynamic visual effects with the particle system",
+                      ],
+                      ar: [
+                        "تأثيرات الجسيمات",
+                        "إنشاء تأثيرات مرئية ديناميكية باستخدام نظام الجسيمات",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Lighting Techniques",
+                        "Implementing dynamic lighting and post-processing effects",
+                      ],
+                      ar: [
+                        "تقنيات الإضاءة",
+                        "تنفيذ الإضاءة الديناميكية وتأثيرات ما بعد المعالجة",
+                      ],
+                    },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className={`relative ${
+                        language === "ar" ? "pr-9" : "pl-9"
+                      } border-[#333]`}
+                    >
+                      <div
+                        className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      >
+                        <div className="size-2 rounded-full bg-emerald-500"></div>
+                      </div>
+                      <p className="text-gray-300">
+                        {language === "en" ? item.en[0] : item.ar[0]}
+                      </p>
+                      <p className="text-gray-500 text-sm">
+                        {language === "en" ? item.en[1] : item.ar[1]}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="!mt-8 p-4 relative rounded bg-emerald-100/5 border border-[#333] overflow-hidden">
+                  <div className="absolute top-0 left-0 right-0 h-8 bg-[#111] border-b border-[#222] flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5 mr-3">
+                      <div className="size-3 rounded-full bg-red-500"></div>
+                      <div className="size-3 rounded-full bg-yellow-500"></div>
+                      <div className="size-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div className="text-xs text-slate-400">Shader Example</div>
                   </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Animation Systems"
-                        : "أنظمة الرسوم المتحركة"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Working with the Animator Controller and animation state machines"
-                        : "العمل مع وحدة تحكم الرسوم المتحركة وآلات حالة الرسوم المتحركة"}
-                    </p>
-                  </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Particle Effects"
-                        : "تأثيرات الجسيمات"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Creating dynamic visual effects with the particle system"
-                        : "إنشاء تأثيرات مرئية ديناميكية باستخدام نظام الجسيمات"}
-                    </p>
-                  </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Lighting Techniques"
-                        : "تقنيات الإضاءة"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Implementing dynamic lighting and post-processing effects"
-                        : "تنفيذ الإضاءة الديناميكية وتأثيرات ما بعد المعالجة"}
-                    </p>
-                  </div>
+                  <pre className="mt-8 text-xs text-emerald-300 font-mono overflow-x-auto !text-left">
+                    <code>{`Shader "Custom/HolographicEffect"
+{
+    Properties
+    {
+        _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (0,1,0.5,1)
+        _RimPower ("Rim Power", Range(0.5, 8.0)) = 3.0
+    }
+    SubShader
+    {
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        LOD 100
+        
+        Pass
+        {
+            ZWrite Off
+            Blend SrcAlpha OneMinusSrcAlpha
+            
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            
+            // Implementation continues...
+            ENDCG
+        }
+    }
+}`}</code>
+                  </pre>
                 </div>
               </TabsContent>
 
-              <TabsContent value="module4" className="p-6 font-mono">
-                <div className="flex items-center gap-3 mb-4">
+              <TabsContent value="module4" className="p-6">
+                <div
+                  className={`flex items-center gap-3 mb-4 ${
+                    language === "ar" ? "flex-row-reverse" : ""
+                  }`}
+                >
                   <Gamepad2 className="h-6 w-6 text-emerald-500" />
                   <h3 className="text-xl font-bold">
                     {language === "en"
@@ -434,62 +439,72 @@ public class PhysicsController : MonoBehaviour
                   </h3>
                 </div>
 
-                <div className="space-y-4 pl-9">
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Project Planning and Design"
-                        : "تخطيط وتصميم المشروع"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Creating game design documents and planning development cycles"
-                        : "إنشاء مستندات تصميم اللعبة وتخطيط دورات التطوير"}
-                    </p>
-                  </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Implementation and Testing"
-                        : "التنفيذ والاختبار"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Building a complete game with industry-standard development practices"
-                        : "بناء لعبة كاملة باستخدام ممارسات التطوير القياسية في الصناعة"}
-                    </p>
-                  </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Optimization Techniques"
-                        : "تقنيات التحسين"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Profiling and optimizing game performance for target platforms"
-                        : "تحليل وتحسين أداء اللعبة للمنصات المستهدفة"}
-                    </p>
-                  </div>
-
-                  <div className="relative pl-6 border-l border-[#333]">
-                    <div className="absolute left-0 top-2 w-2 h-2 rounded-full bg-emerald-500"></div>
-                    <p className="text-gray-300">
-                      {language === "en"
-                        ? "Publishing and Distribution"
-                        : "النشر والتوزيع"}
-                    </p>
-                    <p className="text-gray-500 text-sm">
-                      {language === "en"
-                        ? "Preparing games for release and understanding distribution platforms"
-                        : "إعداد الألعاب للإصدار وفهم منصات التوزيع"}
-                    </p>
-                  </div>
+                <div
+                  className={`space-y-4 ${language === "ar" ? "pr-6" : "pl-6"}`}
+                >
+                  {[
+                    {
+                      en: [
+                        "Project Planning and Design",
+                        "Creating game design documents and planning development cycles",
+                      ],
+                      ar: [
+                        "تخطيط وتصميم المشروع",
+                        "إنشاء مستندات تصميم اللعبة وتخطيط دورات التطوير",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Implementation and Testing",
+                        "Building a complete game with industry-standard development practices",
+                      ],
+                      ar: [
+                        "التنفيذ والاختبار",
+                        "بناء لعبة كاملة باستخدام ممارسات التطوير القياسية في الصناعة",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Optimization Techniques",
+                        "Profiling and optimizing game performance for target platforms",
+                      ],
+                      ar: [
+                        "تقنيات التحسين",
+                        "تحليل وتحسين أداء اللعبة للمنصات المستهدفة",
+                      ],
+                    },
+                    {
+                      en: [
+                        "Publishing and Distribution",
+                        "Preparing games for release and understanding distribution platforms",
+                      ],
+                      ar: [
+                        "النشر والتوزيع",
+                        "إعداد الألعاب للإصدار وفهم منصات التوزيع",
+                      ],
+                    },
+                  ].map((item, index) => (
+                    <div
+                      key={index}
+                      className={`relative ${
+                        language === "ar" ? "pr-9" : "pl-9"
+                      } border-[#333]`}
+                    >
+                      <div
+                        className={`absolute top-0 mr-2 mt-1 size-5 rounded-full bg-emerald-500/20 flex items-center justify-center ${
+                          language === "ar" ? "right-0" : "left-0"
+                        }`}
+                      >
+                        <div className="size-2 rounded-full bg-emerald-500"></div>
+                      </div>
+                      <p className="text-gray-300">
+                        {language === "en" ? item.en[0] : item.ar[0]}
+                      </p>
+                      <p className="text-gray-500 text-sm">
+                        {language === "en" ? item.en[1] : item.ar[1]}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </TabsContent>
             </div>
@@ -502,13 +517,13 @@ public class PhysicsController : MonoBehaviour
             <div>
               <p className="text-gray-300 font-medium">
                 {language === "en"
-                  ? "Ready to start your game development journey?"
-                  : "هل أنت مستعد لبدء رحلة تطوير الألعاب الخاصة بك؟"}
+                  ? "Start building your future with Unity today."
+                  : "ابدأ في بناء مستقبلك باستخدام Unity اليوم."}
               </p>
               <p className="text-gray-500 text-sm">
                 {language === "en"
-                  ? "Apply now and join our next cohort of Unity developers."
-                  : "قدم الآن وانضم إلى مجموعتنا التالية من مطوري Unity."}
+                  ? "Apply to the official Unity Bootcamp by London Academy, sponsored by MTCIT."
+                  : "سجل في معسكر Unity الرسمي من تنفيذ أكاديمية لندن وبرعاية وزارة النقل."}
               </p>
             </div>
           </div>

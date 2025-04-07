@@ -1,9 +1,60 @@
-import {Code, Cpu, Layers, Terminal} from "lucide-react";
+import {cn} from "@/lib/utils";
+import {CheckCircle2, Code, Cpu, Layers, Terminal} from "lucide-react";
 import Image from "next/image";
 
 interface AboutProps {
   language: "en" | "ar";
 }
+
+const aboutItems = [
+  {
+    icon: <Terminal className="h-5 w-5" />,
+    color: "emerald",
+    title: {
+      en: "National Digital Skills Initiative",
+      ar: "مبادرة المهارات الرقمية الوطنية",
+    },
+    description: {
+      en: "Sponsored by MTCIT, this bootcamp is part of a nationwide initiative to empower the next generation of digital creators and game developers in Oman.",
+      ar: "بدعم من وزارة النقل والاتصالات وتقنية المعلومات، يأتي هذا البرنامج ضمن مبادرة وطنية لتمكين الجيل القادم من المبدعين الرقميين ومطوري الألعاب في سلطنة عمان.",
+    },
+  },
+  {
+    icon: <Cpu className="h-5 w-5" />,
+    color: "cyan",
+    title: {
+      en: "Delivered by London Academy",
+      ar: "تنفيذ أكاديمية لندن",
+    },
+    description: {
+      en: "London Academy brings expert-led, hands-on training in Unity, offering a curriculum tailored to industry expectations and local talent development.",
+      ar: "تقدم أكاديمية لندن تدريباً عملياً بقيادة خبراء في Unity، من خلال منهج مصمم وفقاً لمتطلبات الصناعة وتنمية الكفاءات المحلية.",
+    },
+  },
+  {
+    icon: <Layers className="h-5 w-5" />,
+    color: "purple",
+    title: {
+      en: "Real Career Pathways",
+      ar: "مسارات مهنية حقيقية",
+    },
+    description: {
+      en: "Participants will graduate with portfolio-ready projects and job-ready skills to pursue roles in game development, both locally and abroad.",
+      ar: "سيتخرج المشاركون بمشاريع جاهزة للعرض ومهارات تؤهلهم للحصول على وظائف في مجال تطوير الألعاب محلياً ودولياً.",
+    },
+    careers: [
+      {label: {en: "Game Developer", ar: "مطور ألعاب"}},
+      {label: {en: "Unity Specialist", ar: "متخصص Unity"}},
+      {label: {en: "XR/AR Developer", ar: "مطور XR/AR"}},
+    ],
+  },
+];
+
+const colorMap = {
+  emerald: "bg-emerald-500 text-emerald-500",
+  cyan: "bg-cyan-500 text-cyan-500",
+  purple: "bg-purple-500 text-purple-500",
+};
 
 export function About({language}: AboutProps) {
   return (
@@ -66,58 +117,53 @@ export function About({language}: AboutProps) {
           </div>
 
           <div className="space-y-8">
-            <div className="space-y-2 relative border-slate-800 border py-4 rounded-lg overflow-hidden bg-[#0a0a0a]/20">
-              <div className="flex items-center gap-3">
-                <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg  text-emerald-500">
-                  <Terminal className="h-5 w-5" />
+            {aboutItems.map((item, index) => (
+              <div
+                key={index}
+                className="space-y-2 relative border-slate-800 border py-4 rounded-lg overflow-hidden bg-[#0a0a0a]/20"
+              >
+                <div className="flex items-center gap-3 px-5">
+                  <div
+                    className={cn(
+                      "absolute top-0 w-1 h-full",
+                      language === "en" ? "left-0" : "right-0",
+                      colorMap[item.color].split(" ")[0] // just the bg color
+                    )}
+                  ></div>
+                  <div
+                    className={cn(
+                      "absolute flex top-1 items-center justify-center w-10 h-10 rounded-lg",
+                      language === "en" ? "right-1" : "left-1",
+                      colorMap[item.color].split(" ")[1] // just the text color
+                    )}
+                  >
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold">
+                    {language === "en" ? item.title.en : item.title.ar}
+                  </h3>
                 </div>
-                <h3 className="text-xl font-bold">
-                  {language === "en" ? "Ministry Initiative" : "مبادرة الوزارة"}
-                </h3>
-              </div>
-              <p className="text-gray-400 pl-[52px]">
-                {language === "en"
-                  ? "The Ministry of Transport, Communications and Information Technology is committed to developing digital skills across the nation through cutting-edge training programs."
-                  : "تلتزم وزارة النقل والاتصالات وتكنولوجيا المعلومات بتطوير المهارات الرقمية في جميع أنحاء البلاد من خلال برامج تدريبية متطورة."}
-              </p>
-            </div>
-
-            <div className="space-y-2 relative border-slate-800 border py-4 rounded-lg overflow-hidden bg-[#0a0a0a]/20">
-              <div className="flex items-center gap-3">
-                <div className="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg  text-cyan-500">
-                  <Cpu className="h-5 w-5" />
-                </div>
-                <h3 className="text-xl font-bold">
+                <p className="text-gray-400 px-5">
                   {language === "en"
-                    ? "Professional Training"
-                    : "تدريب احترافي"}
-                </h3>
-              </div>
-              <p className="text-gray-400 pl-[52px]">
-                {language === "en"
-                  ? "Learn from industry experts with hands-on experience in game development and Unity technologies. Our curriculum is designed to meet industry standards."
-                  : "تعلم من خبراء الصناعة ذوي الخبرة العملية في تطوير الألعاب وتقنيات Unity. تم تصميم منهجنا لتلبية معايير الصناعة."}
-              </p>
-            </div>
+                    ? item.description.en
+                    : item.description.ar}
+                </p>
 
-            <div className="space-y-2 relative border-slate-800 border py-4 rounded-lg overflow-hidden bg-[#0a0a0a]/20">
-              <div className="flex items-center gap-3">
-                <div className="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg text-purple-500">
-                  <Layers className="h-5 w-5" />
-                </div>
-                <h3 className="text-xl font-bold">
-                  {language === "en" ? "Career Opportunities" : "فرص وظيفية"}
-                </h3>
+                {item.careers && (
+                  <ul className="mt-3 space-y-1 px-5">
+                    {item.careers.map((career, i) => (
+                      <li
+                        key={i}
+                        className="flex items-center text-sm text-slate-400"
+                      >
+                        <CheckCircle2 className="mr-2 size-4 text-purple-400" />
+                        {language === "en" ? career.label.en : career.label.ar}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-              <p className="text-gray-400 pl-[52px]">
-                {language === "en"
-                  ? "Graduates will be prepared for careers in the growing game development industry, both locally and internationally, with portfolio-ready projects."
-                  : "سيكون الخريجون مستعدين للعمل في صناعة تطوير الألعاب المتنامية، محليًا ودوليًا، مع مشاريع جاهزة للمحفظة."}
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>

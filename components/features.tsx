@@ -19,79 +19,79 @@ export function Features({language}: FeaturesProps) {
   const features = [
     {
       icon: <Calendar className="h-10 w-10 text-emerald-500" />,
-      title: language === "en" ? "6-Month Program" : "برنامج لمدة 6 أشهر",
+      title: language === "en" ? "6-Month Bootcamp" : "معسكر لمدة 6 أشهر",
       description:
         language === "en"
-          ? "Intensive training covering all aspects of Unity game development with practical projects."
-          : "تدريب مكثف يغطي جميع جوانب تطوير ألعاب Unity مع مشاريع عملية.",
+          ? "A structured and intensive journey designed to take you from beginner to job-ready Unity developer."
+          : "رحلة تدريبية مكثفة ومنظمة تهدف إلى تأهيلك من مبتدئ إلى مطور Unity جاهز لسوق العمل.",
     },
     {
       icon: <Code className="h-10 w-10 text-cyan-500" />,
-      title: language === "en" ? "C# Programming" : "برمجة C#",
+      title: language === "en" ? "C# for Unity" : "C# لـ Unity",
       description:
         language === "en"
-          ? "Master C# programming language, the foundation of Unity game development."
-          : "إتقان لغة برمجة C#، أساس تطوير ألعاب Unity.",
+          ? "Learn how to write professional, scalable C# code — the language powering Unity games."
+          : "تعلم كيفية كتابة كود C# احترافي وقابل للتوسع — اللغة التي تدير ألعاب Unity.",
     },
     {
       icon: <Cpu className="h-10 w-10 text-purple-500" />,
       title:
-        language === "en" ? "Game Engine Architecture" : "هندسة محرك الألعاب",
+        language === "en" ? "Game Engine Fundamentals" : "أساسيات محرك الألعاب",
       description:
         language === "en"
-          ? "Understand the core architecture of game engines and optimization techniques."
-          : "فهم الهندسة الأساسية لمحركات الألعاب وتقنيات التحسين.",
+          ? "Understand Unity’s engine architecture, components, and performance principles."
+          : "فهم بنية محرك Unity ومكوناته ومبادئ الأداء.",
     },
     {
       icon: <Laptop className="h-10 w-10 text-indigo-500" />,
-      title: language === "en" ? "Hands-on Projects" : "مشاريع عملية",
+      title:
+        language === "en" ? "Project-Based Learning" : "تعلم قائم على المشاريع",
       description:
         language === "en"
-          ? "Build your portfolio with real game development projects using industry-standard workflows."
-          : "بناء محفظتك بمشاريع تطوير ألعاب حقيقية باستخدام سير عمل قياسية في الصناعة.",
+          ? "Build real-world games using industry workflows and version control tools like Git."
+          : "قم ببناء ألعاب واقعية باستخدام سير عمل الصناعة وأدوات التحكم في الإصدارات مثل Git.",
     },
     {
       icon: <Server className="h-10 w-10 text-emerald-500" />,
-      title:
-        language === "en" ? "Multiplayer Development" : "تطوير متعدد اللاعبين",
+      title: language === "en" ? "Multiplayer Systems" : "أنظمة اللعب الجماعي",
       description:
         language === "en"
-          ? "Learn networking fundamentals and how to create multiplayer game experiences."
-          : "تعلم أساسيات الشبكات وكيفية إنشاء تجارب ألعاب متعددة اللاعبين.",
+          ? "Dive into Unity networking to create local and online multiplayer gameplay."
+          : "استكشف الشبكات في Unity لإنشاء تجارب ألعاب محلية وعبر الإنترنت.",
     },
     {
       icon: <Zap className="h-10 w-10 text-cyan-500" />,
-      title: language === "en" ? "Performance Optimization" : "تحسين الأداء",
+      title: language === "en" ? "Performance Tuning" : "تحسين الأداء",
       description:
         language === "en"
-          ? "Master techniques to optimize game performance across different platforms and devices."
-          : "إتقان تقنيات تحسين أداء اللعبة عبر منصات وأجهزة مختلفة.",
+          ? "Profile and optimize games for smooth performance on various platforms."
+          : "حلل وحسّن أداء الألعاب لتعمل بسلاسة على مختلف المنصات.",
     },
     {
       icon: <Shield className="h-10 w-10 text-purple-500" />,
-      title: language === "en" ? "Industry Certification" : "شهادة صناعية",
+      title: language === "en" ? "MTCIT Certification" : "شهادة من MTCIT",
       description:
         language === "en"
-          ? "Receive an official certificate from MTCIT recognized by industry partners."
-          : "احصل على شهادة رسمية من MTCIT معترف بها من قبل شركاء الصناعة.",
+          ? "Earn a nationally endorsed certificate, recognized by industry employers in Oman and abroad."
+          : "احصل على شهادة معتمدة وطنياً، معترف بها من قبل جهات التوظيف محليًا ودوليًا.",
     },
     {
       icon: <Globe className="h-10 w-10 text-indigo-500" />,
-      title: language === "en" ? "Global Standards" : "معايير عالمية",
+      title: language === "en" ? "International Standards" : "معايير دولية",
       description:
         language === "en"
-          ? "Training aligned with international game development standards and best practices."
-          : "تدريب متوافق مع معايير تطوير الألعاب الدولية وأفضل الممارسات.",
+          ? "Training aligned with global game development standards, best practices, and trends."
+          : "تدريب يتماشى مع المعايير الدولية لتطوير الألعاب وأفضل الممارسات والاتجاهات الحديثة.",
     },
   ];
 
   return (
     <section id="features" className="py-20 relative bg-[#050505]">
       {/* Background elements */}
-      <div className="absolute inset-0 z-0">
+      {/* <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[#0f1117] opacity-90"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      </div>
+      </div> */}
 
       {/* Floating tech elements */}
       <div className="absolute top-20 right-10 opacity-10 hidden lg:block">
@@ -125,7 +125,7 @@ export function Features({language}: FeaturesProps) {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-6 rounded-lg border border-slate-800 hover:bg-white/5 transition-colors group relative overflow-hidden"
+              className="p-6 rounded-lg border border-slate-800 hover:bg-emerald-500/5 transition-colors group relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-slate-800/50 to-transparent rounded-bl-full"></div>
               <div className="relative  rounded-lg h-full transition-colors duration-300 group-hover:border-emerald-500/50">

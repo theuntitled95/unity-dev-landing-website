@@ -1,8 +1,10 @@
 "use client";
 
 import {About} from "@/components/about";
+import {ApplicationForm} from "@/components/apply";
 import {Contact} from "@/components/contact";
 import {Curriculum} from "@/components/curriculum";
+import {FAQ} from "@/components/faq";
 import {Features} from "@/components/features";
 import {Footer} from "@/components/footer";
 import {Header} from "@/components/header";
@@ -57,6 +59,8 @@ export function LandingPage() {
         <About language={language} />
         <Features language={language} />
         <Curriculum language={language} />
+        <FAQ language={language} />
+        <ApplicationForm language={language} />
         <Contact language={language} />
       </main>
 

@@ -1,52 +1,55 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { LanguageSwitcher } from "@/components/language-switcher"
-import { Menu, X, Terminal } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {LanguageSwitcher} from "@/components/language-switcher";
+import {Button} from "@/components/ui/button";
+import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
+import {Menu, Terminal, X} from "lucide-react";
+import Link from "next/link";
+import {useEffect, useState} from "react";
 
 interface HeaderProps {
-  language: "en" | "ar"
-  setLanguage: (language: "en" | "ar") => void
+  language: "en" | "ar";
+  setLanguage: (language: "en" | "ar") => void;
 }
 
-export function Header({ language, setLanguage }: HeaderProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+export function Header({language, setLanguage}: HeaderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   // Handle scroll for header styling
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
-    }
+      setScrolled(window.scrollY > 10);
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Smooth scrolling for anchor links
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault()
-    setIsOpen(false)
+  const handleAnchorClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    setIsOpen(false);
 
-    const element = document.getElementById(id)
+    const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
         top: element.offsetTop - 80, // Account for header height
         behavior: "smooth",
-      })
+      });
 
       // Update URL without page jump
-      window.history.pushState(null, "", `#${id}`)
+      window.history.pushState(null, "", `#${id}`);
     }
-  }
+  };
 
   return (
     <header
@@ -55,39 +58,50 @@ export function Header({ language, setLanguage }: HeaderProps) {
       }`}
     >
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Terminal className="h-8 w-8 text-[#00ff9d]" />
-          <span className="text-lg font-bold tracking-tight">
-            <span className="text-[#00ff9d]">{language === "en" ? "Unity" : "Unity"}</span>
-            <span>{language === "en" ? "Dev" : "تطوير"}</span>
-          </span>
-        </div>
+        <Link href="/">
+          <div className="flex items-center gap-2">
+            <Terminal className="h-8 w-8 text-emerald-500" />
+            <span className="text-lg font-bold tracking-tight">
+              <span className="text-emerald-500">
+                {language === "en" ? "Unity" : "Unity"}
+              </span>
+              <span>{language === "en" ? "Dev" : "تطوير"}</span>
+            </span>
+          </div>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-8">
           <Link
             href="#about"
-            className="text-sm font-medium transition-colors hover:text-[#00ff9d]"
+            className="text-sm font-medium transition-colors hover:text-emerald-500"
             onClick={(e) => handleAnchorClick(e, "about")}
           >
             {language === "en" ? "About" : "حول"}
           </Link>
           <Link
             href="#features"
-            className="text-sm font-medium transition-colors hover:text-[#00ff9d]"
+            className="text-sm font-medium transition-colors hover:text-emerald-500"
             onClick={(e) => handleAnchorClick(e, "features")}
           >
             {language === "en" ? "Features" : "الميزات"}
           </Link>
           <Link
             href="#curriculum"
-            className="text-sm font-medium transition-colors hover:text-[#00ff9d]"
+            className="text-sm font-medium transition-colors hover:text-emerald-500"
             onClick={(e) => handleAnchorClick(e, "curriculum")}
           >
             {language === "en" ? "Curriculum" : "المنهج"}
           </Link>
           <Link
+            href="#faq"
+            className="text-sm font-medium transition-colors hover:text-emerald-500"
+            onClick={(e) => handleAnchorClick(e, "faq")}
+          >
+            {language === "en" ? "FAQ" : "الأسئلة الشائعة"}
+          </Link>
+          <Link
             href="#contact"
-            className="text-sm font-medium transition-colors hover:text-[#00ff9d]"
+            className="text-sm font-medium transition-colors hover:text-emerald-500"
             onClick={(e) => handleAnchorClick(e, "contact")}
           >
             {language === "en" ? "Contact" : "اتصل بنا"}
@@ -97,8 +111,13 @@ export function Header({ language, setLanguage }: HeaderProps) {
         <div className="flex items-center gap-4">
           <LanguageSwitcher language={language} setLanguage={setLanguage} />
 
-          <Button className="hidden md:inline-flex bg-[#00ff9d] text-black hover:bg-[#00cc7d] transition-colors">
-            {language === "en" ? "Apply Now" : "قدم الآن"}
+          <Button
+            asChild
+            className="hidden md:inline-flex bg-emerald-500 text-black hover:bg-[#00cc7d] transition-colors"
+          >
+            <Link href="#apply">
+              {language === "en" ? "Apply Now" : "قدم الآن"}
+            </Link>
           </Button>
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -113,12 +132,17 @@ export function Header({ language, setLanguage }: HeaderProps) {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side={language === "ar" ? "right" : "left"} className="bg-[#0a0a0a] border-[#222] text-white">
+            <SheetContent
+              side={language === "ar" ? "right" : "left"}
+              className="bg-[#0a0a0a] border-[#222] text-white"
+            >
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-2">
-                  <Terminal className="h-8 w-8 text-[#00ff9d]" />
+                  <Terminal className="h-8 w-8 text-emerald-500" />
                   <span className="text-lg font-bold tracking-tight">
-                    <span className="text-[#00ff9d]">{language === "en" ? "Unity" : "Unity"}</span>
+                    <span className="text-emerald-500">
+                      {language === "en" ? "Unity" : "Unity"}
+                    </span>
                     <span>{language === "en" ? "Dev" : "تطوير"}</span>
                   </span>
                 </div>
@@ -136,28 +160,35 @@ export function Header({ language, setLanguage }: HeaderProps) {
               <nav className="flex flex-col gap-6">
                 <Link
                   href="#about"
-                  className="text-lg font-medium transition-colors hover:text-[#00ff9d]"
+                  className="text-lg font-medium transition-colors hover:text-emerald-500"
                   onClick={(e) => handleAnchorClick(e, "about")}
                 >
                   {language === "en" ? "About" : "حول"}
                 </Link>
                 <Link
                   href="#features"
-                  className="text-lg font-medium transition-colors hover:text-[#00ff9d]"
+                  className="text-lg font-medium transition-colors hover:text-emerald-500"
                   onClick={(e) => handleAnchorClick(e, "features")}
                 >
                   {language === "en" ? "Features" : "الميزات"}
                 </Link>
                 <Link
                   href="#curriculum"
-                  className="text-lg font-medium transition-colors hover:text-[#00ff9d]"
+                  className="text-lg font-medium transition-colors hover:text-emerald-500"
                   onClick={(e) => handleAnchorClick(e, "curriculum")}
                 >
                   {language === "en" ? "Curriculum" : "المنهج"}
                 </Link>
                 <Link
+                  href="#faq"
+                  className="text-lg font-medium transition-colors hover:text-emerald-500"
+                  onClick={(e) => handleAnchorClick(e, "faq")}
+                >
+                  {language === "en" ? "FAQ" : "الأسئلة الشائعة"}
+                </Link>
+                <Link
                   href="#contact"
-                  className="text-lg font-medium transition-colors hover:text-[#00ff9d]"
+                  className="text-lg font-medium transition-colors hover:text-emerald-500"
                   onClick={(e) => handleAnchorClick(e, "contact")}
                 >
                   {language === "en" ? "Contact" : "اتصل بنا"}
@@ -165,16 +196,18 @@ export function Header({ language, setLanguage }: HeaderProps) {
               </nav>
 
               <Button
-                className="mt-8 w-full bg-[#00ff9d] text-black hover:bg-[#00cc7d]"
+                asChild
+                className="mt-8 w-full bg-emerald-500 text-black hover:bg-[#00cc7d]"
                 onClick={() => setIsOpen(false)}
               >
-                {language === "en" ? "Apply Now" : "قدم الآن"}
+                <Link href="#apply">
+                  {language === "en" ? "Apply Now" : "قدم الآن"}
+                </Link>
               </Button>
             </SheetContent>
           </Sheet>
         </div>
       </div>
     </header>
-  )
+  );
 }
-

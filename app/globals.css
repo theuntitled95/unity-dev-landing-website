@@ -25,6 +25,10 @@
   --radius: 0.5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .font-arabic {
   font-family: var(--font-arabic);
 }
