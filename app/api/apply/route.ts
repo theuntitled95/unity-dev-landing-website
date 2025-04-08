@@ -50,7 +50,7 @@ export async function POST(req: Request) {
             {name: "motivation_statement", value: motivation},
           ],
           context: {
-            pageUri: "https://unity.londonacademy.om/apply",
+            pageUri: "https://unity.londonacademy.om",
             pageName: "Unity Game Development Application",
           },
         }),
