@@ -5,6 +5,22 @@ import {NextResponse} from "next/server";
 export async function POST(req: Request) {
   const body = await req.json();
 
+  console.log("HubSpot Portal ID:", process.env.HUBSPOT_PORTAL_ID);
+  console.log("HubSpot Form GUID:", process.env.HUBSPOT_FORM_GUID);
+  console.log(
+    "Zoho Access Token:",
+    process.env.ZOHO_ACCESS_TOKEN?.slice(0, 10) + "..."
+  );
+  console.log("Zoho Form Link Name:", process.env.ZOHO_FORM_LINK_NAME);
+
+  if (!process.env.HUBSPOT_PORTAL_ID || !process.env.HUBSPOT_FORM_GUID) {
+    console.error("❌ Missing HubSpot ENV variables");
+  }
+
+  if (!process.env.ZOHO_ACCESS_TOKEN || !process.env.ZOHO_FORM_LINK_NAME) {
+    console.error("❌ Missing Zoho ENV variables");
+  }
+
   const {firstName, lastName, email, phone, education, experience, motivation} =
     body;
 
@@ -28,11 +44,19 @@ export async function POST(req: Request) {
 
   // Send to HubSpot
   try {
-    console.log(
-      "Submitting to:",
-      process.env.HUBSPOT_PORTAL_ID,
-      process.env.HUBSPOT_FORM_GUID
-    );
+    console.log("📤 Submitting to HubSpot with:", {
+      portalId: process.env.HUBSPOT_PORTAL_ID,
+      formId: process.env.HUBSPOT_FORM_GUID,
+      payload: {
+        firstname: firstName,
+        lastname: lastName,
+        email,
+        phone,
+        education,
+        experience,
+        motivation,
+      },
+    });
 
     const hubspotRes = await fetch(
       `https://api.hsforms.com/submissions/v3/integration/submit/${process.env.HUBSPOT_PORTAL_ID}/${process.env.HUBSPOT_FORM_GUID}`,
