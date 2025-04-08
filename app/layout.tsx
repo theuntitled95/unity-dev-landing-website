@@ -6,6 +6,7 @@ import {ThemeProvider} from "@/components/theme-provider";
 import {cn} from "@/lib/utils";
 
 import "@/app/globals.css";
+import {Toaster} from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -34,8 +35,17 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
+
+      <script
+        type="text/javascript"
+        id="hs-script-loader"
+        async
+        defer
+        src="//js.hs-scripts.com/43422284.js"
+      ></script>
     </html>
   );
 }

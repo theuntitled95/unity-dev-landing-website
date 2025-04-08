@@ -21,6 +21,7 @@ import {
   Terminal,
 } from "lucide-react";
 import {useState} from "react";
+import {toast} from "sonner";
 
 interface ApplicationFormProps {
   language: "en" | "ar";
@@ -28,16 +29,19 @@ interface ApplicationFormProps {
 
 export function ApplicationForm({language}: ApplicationFormProps) {
   const [formState, setFormState] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
+    countryCode: "+968",
     education: "",
     experience: "",
     motivation: "",
   });
 
   const [errors, setErrors] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     education: "",
@@ -54,7 +58,6 @@ export function ApplicationForm({language}: ApplicationFormProps) {
     const {name, value} = e.target;
     setFormState((prev) => ({...prev, [name]: value}));
 
-    // Clear error when user types
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({...prev, [name]: ""}));
     }
@@ -63,7 +66,6 @@ export function ApplicationForm({language}: ApplicationFormProps) {
   const handleSelectChange = (value: string, name: string) => {
     setFormState((prev) => ({...prev, [name]: value}));
 
-    // Clear error when user selects
     if (errors[name as keyof typeof errors]) {
       setErrors((prev) => ({...prev, [name]: ""}));
     }
@@ -72,7 +74,8 @@ export function ApplicationForm({language}: ApplicationFormProps) {
   const validateForm = () => {
     let isValid = true;
     const newErrors = {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       education: "",
@@ -80,8 +83,15 @@ export function ApplicationForm({language}: ApplicationFormProps) {
       motivation: "",
     };
 
-    if (!formState.name.trim()) {
-      newErrors.name = language === "en" ? "Name is required" : "الاسم مطلوب";
+    if (!formState.firstName.trim()) {
+      newErrors.firstName =
+        language === "en" ? "First name is required" : "الاسم الأول مطلوب";
+      isValid = false;
+    }
+
+    if (!formState.lastName.trim()) {
+      newErrors.lastName =
+        language === "en" ? "Last name is required" : "اسم العائلة مطلوب";
       isValid = false;
     }
 
@@ -100,6 +110,12 @@ export function ApplicationForm({language}: ApplicationFormProps) {
     if (!formState.phone.trim()) {
       newErrors.phone =
         language === "en" ? "Phone number is required" : "رقم الهاتف مطلوب";
+      isValid = false;
+    } else if (!/^\d{8,}$/.test(formState.phone.trim())) {
+      newErrors.phone =
+        language === "en"
+          ? "Please enter a valid phone number"
+          : "يرجى إدخال رقم هاتف صالح";
       isValid = false;
     }
 
@@ -137,30 +153,60 @@ export function ApplicationForm({language}: ApplicationFormProps) {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsSubmitting(true);
 
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
+      try {
+        const response = await fetch("/api/apply", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formState),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to submit application");
+        }
+
         setIsSubmitted(true);
         setFormState({
-          name: "",
+          firstName: "",
+          lastName: "",
           email: "",
           phone: "",
+          countryCode: "+968",
           education: "",
           experience: "",
           motivation: "",
         });
 
-        // Reset submission status after 5 seconds
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      }, 1500);
+        toast.success(
+          language === "en"
+            ? "Application submitted successfully!"
+            : "تم تقديم الطلب بنجاح!"
+        );
+
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } catch (error) {
+        console.error(error);
+        toast.error(
+          language === "en"
+            ? "Submission failed. Please try again."
+            : "فشل الإرسال. حاول مرة أخرى."
+        );
+      } finally {
+        setIsSubmitting(false);
+      }
+    } else {
+      toast.warning(
+        language === "en"
+          ? "Please fix the errors before submitting."
+          : "يرجى تصحيح الأخطاء قبل التقديم."
+      );
     }
   };
 
@@ -170,7 +216,7 @@ export function ApplicationForm({language}: ApplicationFormProps) {
 
       <div className="container relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex gap-2 px-3 py-1 mb-4 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-400">
+          <div className="inline-flex items-center justify-center gap-2 mb-3 text-emerald-500">
             <FileText className="h-5 w-5" />
             <span className="uppercase text-sm font-semibold tracking-wider">
               {language === "en" ? "Apply Now" : "قدم الآن"}
@@ -299,95 +345,179 @@ export function ApplicationForm({language}: ApplicationFormProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label
-                        htmlFor="name"
+                        htmlFor="firstName"
                         className="text-sm font-medium text-gray-400"
                       >
-                        {language === "en" ? "Full Name" : "الاسم الكامل"}*
+                        {language === "en" ? "First Name" : "الاسم الأول"}*
                       </label>
                       <Input
-                        id="name"
-                        name="name"
-                        value={formState.name}
+                        id="firstName"
+                        name="firstName"
+                        value={formState.firstName}
                         onChange={handleChange}
                         placeholder={
-                          language === "en" ? "Your full name" : "اسمك الكامل"
+                          language === "en" ? "Your first name" : "الاسم الأول"
                         }
                         className="bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10"
-                        aria-invalid={!!errors.name}
+                        aria-invalid={!!errors.firstName}
                         aria-describedby={
-                          errors.name ? "name-error" : undefined
+                          errors.firstName ? "firstName-error" : undefined
                         }
                       />
-                      {errors.name && (
+                      {errors.firstName && (
                         <p
-                          id="name-error"
+                          id="firstName-error"
                           className="text-xs text-red-500 mt-1"
                         >
-                          {errors.name}
+                          {errors.firstName}
                         </p>
                       )}
                     </div>
                     <div className="space-y-2">
                       <label
-                        htmlFor="email"
+                        htmlFor="lastName"
                         className="text-sm font-medium text-gray-400"
                       >
-                        {language === "en" ? "Email" : "البريد الإلكتروني"}*
+                        {language === "en" ? "Last Name" : "اسم العائلة"}*
                       </label>
                       <Input
-                        id="email"
-                        name="email"
-                        value={formState.email}
+                        id="lastName"
+                        name="lastName"
+                        value={formState.lastName}
                         onChange={handleChange}
-                        type="email"
                         placeholder={
-                          language === "en"
-                            ? "Your email address"
-                            : "عنوان بريدك الإلكتروني"
+                          language === "en" ? "Your last name" : "اسم العائلة"
                         }
                         className="bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10"
-                        aria-invalid={!!errors.email}
+                        aria-invalid={!!errors.lastName}
                         aria-describedby={
-                          errors.email ? "email-error" : undefined
+                          errors.lastName ? "lastName-error" : undefined
                         }
                       />
-                      {errors.email && (
+                      {errors.lastName && (
                         <p
-                          id="email-error"
+                          id="lastName-error"
                           className="text-xs text-red-500 mt-1"
                         >
-                          {errors.email}
+                          {errors.lastName}
                         </p>
                       )}
                     </div>
-                  </div>
+                    <div>
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="email"
+                          className="text-sm font-medium text-gray-400"
+                        >
+                          {language === "en" ? "Email" : "البريد الإلكتروني"}*
+                        </label>
+                        <Input
+                          id="email"
+                          name="email"
+                          value={formState.email}
+                          onChange={handleChange}
+                          type="email"
+                          placeholder={
+                            language === "en"
+                              ? "Your email address"
+                              : "عنوان بريدك الإلكتروني"
+                          }
+                          className="bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10"
+                          aria-invalid={!!errors.email}
+                          aria-describedby={
+                            errors.email ? "email-error" : undefined
+                          }
+                        />
+                        {errors.email && (
+                          <p
+                            id="email-error"
+                            className="text-xs text-red-500 mt-1"
+                          >
+                            {errors.email}
+                          </p>
+                        )}
+                      </div>
+                    </div>
 
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="phone"
-                      className="text-sm font-medium text-gray-400"
-                    >
-                      {language === "en" ? "Phone Number" : "رقم الهاتف"}*
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      value={formState.phone}
-                      onChange={handleChange}
-                      placeholder={
-                        language === "en" ? "Your phone number" : "رقم هاتفك"
-                      }
-                      className="bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10"
-                      aria-invalid={!!errors.phone}
-                      aria-describedby={
-                        errors.phone ? "phone-error" : undefined
-                      }
-                    />
-                    {errors.phone && (
-                      <p id="phone-error" className="text-xs text-red-500 mt-1">
-                        {errors.phone}
-                      </p>
-                    )}
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="phone"
+                        className="text-sm font-medium text-gray-400"
+                      >
+                        {language === "en" ? "Phone Number" : "رقم الهاتف"}*
+                      </label>
+                      <div className="flex">
+                        <div className="relative w-24 mr-2">
+                          <select
+                            id="countryCode"
+                            className="w-full bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10 rounded-md h-10 pl-2 pr-8 appearance-none"
+                            value={formState.countryCode || "+968"}
+                            onChange={(e) => {
+                              setFormState((prev) => ({
+                                ...prev,
+                                countryCode: e.target.value,
+                              }));
+                              // Clear error when user selects
+                              if (errors.phone) {
+                                setErrors((prev) => ({...prev, phone: ""}));
+                              }
+                            }}
+                          >
+                            <option value="+968">🇴🇲 +968</option>
+                            <option value="+971">🇦🇪 +971</option>
+                            <option value="+966">🇸🇦 +966</option>
+                            <option value="+974">🇶🇦 +974</option>
+                            <option value="+973">🇧🇭 +973</option>
+                            <option value="+965">🇰🇼 +965</option>
+                            <option value="+962">🇯🇴 +962</option>
+                            <option value="+20">🇪🇬 +20</option>
+                            <option value="+44">🇬🇧 +44</option>
+                            <option value="+1">🇺🇸 +1</option>
+                            <option value="+91">🇮🇳 +91</option>
+                          </select>
+                          <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                            <svg
+                              className="h-4 w-4 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 9l-7 7-7-7"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <Input
+                          id="phone"
+                          name="phone"
+                          value={formState.phone}
+                          onChange={handleChange}
+                          placeholder={
+                            language === "en"
+                              ? "Your phone number"
+                              : "رقم هاتفك"
+                          }
+                          className="flex-1 bg-[#111] border-[#333] focus:border-emerald-500 focus:ring-emerald-500/10"
+                          aria-invalid={!!errors.phone}
+                          aria-describedby={
+                            errors.phone ? "phone-error" : undefined
+                          }
+                        />
+                      </div>
+                      {errors.phone && (
+                        <p
+                          id="phone-error"
+                          className="text-xs text-red-500 mt-1"
+                        >
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
