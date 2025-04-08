@@ -26,6 +26,28 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      window._hsq = window._hsq || [];
+      window._hsq.push(['setPath', window.location.pathname]);
+      window.hbspt = window.hbspt || {};
+      window.hbspt.forms = window.hbspt.forms || { create: () => {} };
+      window.hsFormsOnReady = () => {};
+      window._hsq.push(['trackPageView']);
+
+      // Disable auto form tracking
+      window._hsq.push(["forms:disableAutomaticCapture"]);
+    `,
+          }}
+        />
+        <script
+          type="text/javascript"
+          id="hs-script-loader"
+          async
+          defer
+          src="//js.hs-scripts.com/43422284.js"
+        ></script>
       </head>
       <body
         className={cn(
@@ -39,29 +61,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           <Toaster />
         </ThemeProvider>
       </body>
-
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-      window._hsq = window._hsq || [];
-      window._hsq.push(['setPath', window.location.pathname]);
-      window.hbspt = window.hbspt || {};
-      window.hbspt.forms = window.hbspt.forms || { create: () => {} };
-      window.hsFormsOnReady = () => {};
-      window._hsq.push(['trackPageView']);
-
-      // Disable auto form tracking
-      window._hsq.push(["forms:disableAutomaticCapture"]);
-    `,
-        }}
-      />
-      <script
-        type="text/javascript"
-        id="hs-script-loader"
-        async
-        defer
-        src="//js.hs-scripts.com/43422284.js"
-      ></script>
     </html>
   );
 }
