@@ -145,7 +145,7 @@ export function Contact({language}: ContactUsProps) {
                   <Button
                     className="bg-emerald-500 text-black hover:bg-[#00cc7d] group"
                     onClick={() =>
-                      (window.location.href = "https://wa.me/96891234567")
+                      (window.location.href = "https://wa.me/96880086666")
                     }
                   >
                     {language === "en"
