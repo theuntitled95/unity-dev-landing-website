@@ -56,11 +56,11 @@ export function Contact({language}: ContactUsProps) {
                       </h3>
                       <p className="text-gray-400">
                         {language === "en"
-                          ? "Ministry of Transport, Communications and Information Technology, Muscat, Oman"
-                          : "وزارة النقل والاتصالات وتكنولوجيا المعلومات، مسقط، عمان"}
+                          ? "1st Floor, Al Araimi Boulevard, Seeb, Muscat, Oman"
+                          : "الطابق الأول، بوليفارد العريمي، السيب، مسقط، عمان"}
                       </p>
                       <a
-                        href="https://maps.google.com/?q=Ministry+of+Transport+Communications+and+Information+Technology+Muscat+Oman"
+                        href="https://maps.app.goo.gl/hgtoug29QwPNszyY8"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-emerald-500 hover:underline mt-2 text-sm"
@@ -81,10 +81,10 @@ export function Contact({language}: ContactUsProps) {
                       </h3>
                       <p className="text-gray-400">
                         <a
-                          href="mailto:unity-training@mtcit.gov.om"
+                          href="mailto:hr@london.edu.om"
                           className="hover:text-emerald-500 transition-colors"
                         >
-                          unity-training@mtcit.gov.om
+                          hr@london.edu.om
                         </a>
                       </p>
                       <p className="text-gray-500 text-sm mt-2">
@@ -105,10 +105,10 @@ export function Contact({language}: ContactUsProps) {
                       </h3>
                       <p className="text-gray-400">
                         <a
-                          href="tel:+9682XXXXXXX"
+                          href="tel:+96880086666"
                           className="hover:text-emerald-500 transition-colors"
                         >
-                          +968 2XXX XXXX
+                          +968 8008 6666
                         </a>
                       </p>
                       <p className="text-gray-500 text-sm mt-2">
