@@ -115,7 +115,7 @@ export function Header({language, setLanguage}: HeaderProps) {
             asChild
             className="hidden md:inline-flex bg-emerald-500 text-black hover:bg-[#00cc7d] transition-colors"
           >
-            <Link href="#apply">
+            <Link href="https://zurl.to/pd03?source=CareerSite">
               {language === "en" ? "Apply Now" : "قدم الآن"}
             </Link>
           </Button>
@@ -200,7 +200,7 @@ export function Header({language, setLanguage}: HeaderProps) {
                 className="mt-8 w-full bg-emerald-500 text-black hover:bg-[#00cc7d]"
                 onClick={() => setIsOpen(false)}
               >
-                <Link href="#apply">
+                <Link href="https://zurl.to/pd03?source=CareerSite">
                   {language === "en" ? "Apply Now" : "قدم الآن"}
                 </Link>
               </Button>

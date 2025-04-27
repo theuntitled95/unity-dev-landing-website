@@ -249,7 +249,11 @@ export function ApplicationForm({language}: ApplicationFormProps) {
                   </div>
                 </div>
 
-                <div className="pt-8 space-y-8 font-mono">
+                <div
+                  className={`pt-8 space-y-8 font-mono ${
+                    language === "ar" ? "!font-sans" : ""
+                  }`}
+                >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
                       <GraduationCap className="h-5 w-5 text-emerald-500" />
@@ -263,8 +267,8 @@ export function ApplicationForm({language}: ApplicationFormProps) {
                       <p className="text-gray-400">
                         <span className="text-gray-500">"</span>
                         {language === "en"
-                          ? "Open to all Omani citizens aged 18-35 with a passion for game development"
-                          : "متاح لجميع المواطنين العمانيين الذين تتراوح أعمارهم بين 18-35 عامًا ولديهم شغف بتطوير الألعاب"}
+                          ? "Open to Omani citizens who are job seekers and passionate about information technology, computer science, or game development."
+                          : "متاح للمواطنين العمانيين الباحثين عن عمل ولديهم شغف في مجال تقنية المعلومات أو علوم الحاسوب أو تطوير الألعاب."}
                         <span className="text-gray-500">"</span>
                       </p>
                     </div>
