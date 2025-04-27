@@ -85,7 +85,10 @@ public class GameController : MonoBehaviour {
                 size="lg"
                 className="bg-emerald-500 text-black hover:bg-[#00cc7d] group"
               >
-                <Link href="https://zurl.to/pd03?source=CareerSite">
+                <Link
+                  href="https://zurl.to/pd03?source=CareerSite"
+                  target="_blank"
+                >
                   {language === "en" ? "Apply Now" : "قدم الآن"}
                   {language === "en" ? (
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

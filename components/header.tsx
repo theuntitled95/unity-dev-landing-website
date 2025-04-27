@@ -115,7 +115,7 @@ export function Header({language, setLanguage}: HeaderProps) {
             asChild
             className="hidden md:inline-flex bg-emerald-500 text-black hover:bg-[#00cc7d] transition-colors"
           >
-            <Link href="https://zurl.to/pd03?source=CareerSite">
+            <Link href="https://zurl.to/pd03?source=CareerSite" target="_blank">
               {language === "en" ? "Apply Now" : "قدم الآن"}
             </Link>
           </Button>

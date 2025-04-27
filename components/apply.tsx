@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/select";
 import {Textarea} from "@/components/ui/textarea";
 import {
+  ArrowLeft,
+  ArrowRight,
   CheckCircle,
   Code,
   FileText,
@@ -20,6 +22,7 @@ import {
   Send,
   Terminal,
 } from "lucide-react";
+import Link from "next/link";
 import {useState} from "react";
 import {toast} from "sonner";
 
@@ -235,7 +238,7 @@ export function ApplicationForm({language}: ApplicationFormProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid max-w-2xl mx-auto gap-12">
           <div className="space-y-8">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-[#00cc7d]/20 rounded-lg blur-lg"></div>
@@ -317,8 +320,21 @@ export function ApplicationForm({language}: ApplicationFormProps) {
               </div>
             </div>
           </div>
-
-          <div className="relative">
+          <Button
+            asChild
+            size="lg"
+            className="bg-emerald-500 text-black hover:bg-[#00cc7d] group"
+          >
+            <Link href="https://zurl.to/pd03?source=CareerSite" target="_blank">
+              {language === "en" ? "Apply Now" : "قدم الآن"}
+              {language === "en" ? (
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              ) : (
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+              )}
+            </Link>
+          </Button>
+          {/* <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 to-[#00cc7d]/20 rounded-lg blur-lg"></div>
             <div className="relative bg-[#0a0a0a] border border-[#222] rounded-lg overflow-hidden">
               <div className="bg-[#111] border-b border-[#222] p-3 flex items-center gap-2">
@@ -732,7 +748,7 @@ export function ApplicationForm({language}: ApplicationFormProps) {
                 </form>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
